@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>今天天气很{{info}}</h2>
+        <!-- 绑定事件的时候 @xxx='yyy' yyy可以写一些简单的语句 -->
+        <!-- <button @click="isHot=!isHot">切换天气</button> -->
+        <button @click="changeweather">切换天气</button>
+        <hr />
+        <h3>a的值为：{{number.a}}</h3>
+        <button @click="number.a++">点我提高a</button>
+        <h3>b的值为：{{number.b}}</h3>
+        <button @click="number.b++">点我提高a</button>
+        <button @click="number = {a:666,b:888}">点我 改变number</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                isHot: true,
+                number:{
+                    a:1,
+                    b:1
+                }
+            },
+            methods: {
+                changeweather() {
+                    this.isHot = !this.isHot;
+                }
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            watch:{
+                isHot:{
+                    immediate:true, //初始化时让handler调用一下
+                    //handler什么时候调用？当isHot发生改变时
+                    handler(newValue,oldValue){
+                        console.log('ishot被修改',newValue,oldValue);
+                    }
+                },
+                // 监视多级结构中某个属性的变化 
+                'number':{
+                    // warch默认不会检测多层级数据变化
+                    deep:true,
+                    handler(){
+                        console.log('number被改变了');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="wageth=device-wageth, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 遍历数组（使用次数多） -->
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入名字" v-model="keyword">
+        <ul>
+            <li v-for="(p,index) in filPersons" :key="index">{{p.name}}-{{p.gender}}-{{p.age}}</li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        // 用watch实现过滤
+        //#region 
+        // var v = new Vue({
+        //     el: '#root',
+        //     data: {
+        //         keyword: '',
+        //         persons: [{
+        //                 age: '19',
+        //                 name: "周杰伦",
+        //                 gender: '男'
+        //             },
+        //             {
+        //                 age: '20',
+        //                 name: "马冬梅",
+        //                 gender: '女'
+        //             }, {
+        //                 age: '12',
+        //                 name: "周冬雨",
+        //                 gender: '女'
+        //             }, {
+        //                 age: '11',
+        //                 name: "温兆伦",
+        //                 gender: '男'
+        //             }
+        //         ],
+        //         filpersons:[]
+        //     },
+        //     watch: {
+        //         // keyword(val) {
+        //         //     this.filpersons = this.persons.filter((p) => {
+        //         //             return p.name.indexOf(val)!==-1
+        //         //         }
+        //         //     )
+        //         // },
+        //         keyword: {
+        //             immediate:true,
+        //             handler(val) {
+        //                 this.filpersons = this.persons.filter((p) => {
+        //                     return p.name.indexOf(val) !== -1
+        //                 })
+        //             }
+        //         }
+        //     }
+        // })
+        //#endregion
+
+        // 用compute实现
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                keyword: '',
+                persons: [{
+                        age: '19',
+                        name: "周杰伦",
+                        gender: '男'
+                    },
+                    {
+                        age: '20',
+                        name: "马冬梅",
+                        gender: '女'
+                    }, {
+                        age: '12',
+                        name: "周冬雨",
+                        gender: '女'
+                    }, {
+                        age: '11',
+                        name: "温兆伦",
+                        gender: '男'
+                    }
+                ],
+            },
+            computed:{
+                // 计算属性在刚开始和所依赖的数据发生改变的时候调用
+                filPersons(){
+                    return this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyword) !==-1
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

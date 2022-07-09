@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2 :style="{opacity}">欢迎学习vue</h2>
+        <button @click="opacity=1">点我回归</button>
+        <button @click="stop">STOP!</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                opacity: 1
+            },
+            methods: {
+                stop(){
+                    // clearInterval(this.timer)
+                    this.$destroy()
+                }
+            },
+            mounted() {
+                console.log('mounted',this);
+                this.timer = setInterval(() => {
+                console.log(setInterval);
+                vm.opacity -= 0.01;
+                if (vm.opacity <= 0) vm.opacity = 1
+            }, 16)
+            },
+            updated() {
+                console.log(this.opacity);
+            },
+            beforeDestroy() {
+                console.log(this.opacity);
+                clearInterval(this.timer)
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        姓：<input type="text" v-model="first">
+        名：<input type="text" v-model="last"><br />
+        <span>{{fullName()}}</span> 
+        <span>{{fullName()}}</span> 
+        <span>{{fullName()}}</span> 
+        <span>{{fullName()}}</span> 
+        <!-- 注意此处（插值语法）函数括号加与不加的区别。加：表示的是把函数返回值插入  不加：表示把函数体加入 -->
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        var v = new Vue({
+            el:'#app',
+            data:{
+                first:'张',
+                last:'三',
+            },
+            methods:{
+                fullName(){
+                    console.log('被调用');
+                    return this.first +'-'+this.last
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <student></student>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.prototype.x = 99
+        const student = Vue.extend({
+            template: `
+            <div><h2>我叫{{name}}</h2>
+                <h2>我来自{{address}}</h2>
+                <button @click="showX">点我显示X</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name: '申屠宇扬',
+                    address: "长春光华学院"
+                }
+            },
+            methods: {
+                showX(){
+                    console.log(this.x)
+                }
+            },
+        })
+        console.log(student);
+        console.log(student.prototype.__proto__ === Vue.prototype);
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                x:99
+            },
+            components:{
+                student
+            }
+        })
+        function Demo(){
+            this.a = 1;
+            this.b = 2
+        }
+        // const d = new Demo()
+        // console.log(d);
+        // console.log(Demo);
+        // console.log(Demo.prototype);            //显示原型属性
+        // console.log(d.__proto__);               //隐式原型属性
+        // console.log(Demo.prototype===d.__proto__);  
+    </script>
+</body>
+</html>

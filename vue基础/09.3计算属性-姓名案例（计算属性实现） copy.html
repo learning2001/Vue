@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- - 定义：要用的属性不存在，需要通过已有的属性计算得来
+    - 原理：底层借助了Object.defineproperty方法提供getter和setter
+    - get函数什么时候执行
+    -  （1）.初次读取时执行一次
+    - ​ （2）.当依赖的数据发生改变时会再次调用
+    - 优势：与methods实现相比，内部有缓存机制（可以实现复用），效率更高，调试方便。
+    - 备注：
+    - ​ （1）计算属性最终会出现在vm上，直接读取使用即可
+    - ​ （2）如果计算属性要被修改，必须写set函数来响应修改，且set中要引起计算时依赖的数据发生改变 -->
+    <div id="app">
+        姓：<input type="text" v-model="first">
+        名：<input type="text" v-model="last"><br />
+        <span>{{fullName}}</span>
+        <span>{{fullName}}</span>
+        <span>{{fullName}}</span>
+        <span>{{fullName}}</span>
+        <input type="checkbox" v-model="test">
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        var v = new Vue({
+            el: '#app',
+            data: {
+                first: '张',
+                last: '三',
+            },
+            methods: {},
+            computed: {
+                // 完整写法
+                fullName: {
+                    // get作用:当有人读取fullName时，get就会被调用，且返回值作为fullName的值
+                    // get什么时候调用？1.初次读取fullName时2.所依赖的数据发生变化时
+                    // fullName会自动拿到get的返回值，写入vm上
+                    get() {
+                        console.log('get');
+                        return this.first + '-' + this.last
+                    },
+                    // set什么时候调用？当fullName修改时
+                    set(value) {
+                        console.log('set', value);
+                        const arr = value.split('-');
+                        this.first = arr[0];
+                        this.last = arr[1];
+                    },                   
+                    // 精简写法
+                    fullName() {
+                        console.log('get');
+                        return this.first + '-' + this.last
+                    }
+                },
+                test:{
+                    get(){
+
+                    },
+                    set(v){
+                        console.log(v);
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

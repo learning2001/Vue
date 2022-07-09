@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{name}}</h2>
+        <h2>当前的n值是<span v-text="n"></span></h2>
+        <h2>放大10倍后n值是 <span v-big="n"></span> </h2>
+        <button @click="n++">点我n+1</button>
+        <hr />
+        <input type="text" v-fbind:value="n">
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.directive('fbind', {
+            //指令与元素成功绑定时（一上来）
+            bind(element, binding) {
+                // console.log('fbind-this',this);  指向window
+                element.value = binding.value
+            },
+            //指令所在元素被插入页面时
+            inserted(element, binding) {
+                console.log('fbind-inserted', this);
+                element.focus();
+            },
+            //指令所在的模板被重新更新时
+            update(element, binding) {
+                element.value = binding.value * 10;
+            },
+        })
+        var v = new Vue({
+            el: '#app',
+            data: {
+                name: "申屠宇扬",
+                n: 1
+            },
+            directives: {
+                // big函数何时会被调用？1.指令和元素成功绑定时（一上来）
+                // 2.指令所在的模板被重新解析时
+                big(element, binding) { //传入真实dom元素和绑定对象
+                    // console.log(element,binding);
+                    element.innerText = binding.value * 10;
+                    // console.log(element,binding.value);
+                },
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

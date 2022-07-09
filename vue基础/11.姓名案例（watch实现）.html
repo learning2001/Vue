@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        姓：<input type="text" v-model="first">
+        名：<input type="text" v-model="last"><br />
+        <span>{{fullName}}</span>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        var v = new Vue({
+            el: '#app',
+            data: {
+                first: '张',
+                last: '三',
+                fullName:'张-三'
+            },
+            methods: {},
+            watch:{
+                first(newValue){
+                    setTimeout(() => {  
+                        // 通过定时器设置一秒钟之后改变
+                        this.fullName = newValue + '-' +this.last
+                    }, 1000);
+                },
+                last(newValue){
+                    this.fullName = this.first + '-' +newValue
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

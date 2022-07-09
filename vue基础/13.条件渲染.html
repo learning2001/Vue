@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <h2>当前的n值是{{n}}</h2>
+        <button @click="n++">点我n+1</button>
+
+        <!-- 使用v-show做条件渲染 -->
+        <!-- <h1 v-show="a">{{aim}}</h1> -->
+        <!-- <h1 v-show="1==='1'">{{aim}}</h1>   可以写表达式 -->
+
+        <!-- 使用v-if做条件渲染 -->
+        <!-- <h2>当前的n值是{{n}}</h2>
+        <button @click="n++">点我n+1</button> -->
+
+        <!-- v-else和v-else-if -->
+        <div v-if="n==1">html</div>
+        <div v-else-if="n==2">css</div>
+        <div v-else-if="n==3">js</div>
+        <div></div>
+        <div v-else>啦啦</div>     
+
+        <!-- 实现多个元素一起消失隐藏 -->
+        <!-- v-if与template配合使用 -->
+        <!-- <template v-if="n==1">
+            <div>html</div>
+            <div>css</div>
+            <div>js</div>
+        </template>  -->
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        var v = new Vue({
+            el:'#app',
+            data:{
+                aim:'前端开发',
+                a:true,
+                n:0
+            },
+            methods:{}
+        })
+        
+    </script>
+</body>
+</html>

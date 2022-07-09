@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        // 1.el的两种写法
+        // var v = new Vue({
+        //     // el:'#app', 第一种写法
+        //     data:{
+        //         name:'申屠'
+        //     },
+        //     methods:{}
+        // })
+        // v.$mount("#root");   //第二种写法
+
+        // 2.data的两种写法
+
+        var vm = new Vue({
+            el: '#root',
+            // 2.1 第一种写法：对象式
+            // data: {name:'申屠宇扬'},
+            // 2.2 第二种写法：函数式
+            data: function () {
+                console.log(this);  //此处的this是vue实例
+                return {
+                    name: '申屠宇扬'
+                }
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>
