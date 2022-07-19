@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage</title>
+</head>
+<body>
+    <h2>sessionStorage</h2>
+    <button onclick="saveData()">点我保存一个数据</button>
+    <button onclick="readData()">点我读取一个数据</button>
+    <button onclick="deleteData()">点我删除一个数据</button>
+    <button onclick="deleteAllData()">点我删除所有数据</button>
+    
+    <script type="text/javascript">
+        let p = {school:'长春光华学院',address:'吉林'}
+        console.log(p.toString());
+        function saveData(){
+            sessionStorage.setItem('name','styy54');
+            sessionStorage.setItem('age',666)
+            sessionStorage.setItem('school',JSON.stringify(p))    //JSON.stringify可以将一个对象变成字符串形式，并体现其中内容
+        }
+        function readData(){
+            console.log(sessionStorage.getItem('school'));
+            console.log(sessionStorage.getItem('name'));
+            const result = sessionStorage.getItem('school');
+            console.log(JSON.parse(result));
+            console.log(sessionStorage.getItem('person'));
+        }
+        function deleteData(){
+            sessionStorage.removeItem("school")   
+        }   
+        function deleteAllData(){
+            sessionStorage.clear()
+        }
+    </script>
+</body>
+</html>
